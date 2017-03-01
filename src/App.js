@@ -25,7 +25,8 @@ const locations = [
             ],
             "created": "2014-12-10T11:35:48.479000Z",
             "edited": "2014-12-20T20:58:18.420000Z",
-            "url": "http://swapi.co/api/planets/2/"
+            "url": "http://swapi.co/api/planets/2/",
+            "image": "http://vignette1.wikia.nocookie.net/starwars/images/4/4a/Alderaan.jpg/revision/latest/scale-to-width-down/500?cb=20061211013805"
         },
         {
             "name": "Yavin IV",
@@ -43,7 +44,8 @@ const locations = [
             ],
             "created": "2014-12-10T11:37:19.144000Z",
             "edited": "2014-12-20T20:58:18.421000Z",
-            "url": "http://swapi.co/api/planets/3/"
+            "url": "http://swapi.co/api/planets/3/",
+            "image": "https://upload.wikimedia.org/wikipedia/en/6/64/Yavin-4.jpg"
         },
         {
             "name": "Hoth",
@@ -61,7 +63,8 @@ const locations = [
             ],
             "created": "2014-12-10T11:39:13.934000Z",
             "edited": "2014-12-20T20:58:18.423000Z",
-            "url": "http://swapi.co/api/planets/4/"
+            "url": "http://swapi.co/api/planets/4/",
+            "image": "http://vignette4.wikia.nocookie.net/starwars/images/1/1d/Hoth_SWCT.png/revision/latest?cb=20160630022322"
         },
         {
             "name": "Dagobah",
@@ -81,7 +84,8 @@ const locations = [
             ],
             "created": "2014-12-10T11:42:22.590000Z",
             "edited": "2014-12-20T20:58:18.425000Z",
-            "url": "http://swapi.co/api/planets/5/"
+            "url": "http://swapi.co/api/planets/5/",
+            "image": "http://vignette2.wikia.nocookie.net/starwars/images/4/48/Dagobah_ep3.jpg/revision/latest?cb=20100122163146"
         },
         {
             "name": "Bespin",
@@ -101,7 +105,8 @@ const locations = [
             ],
             "created": "2014-12-10T11:43:55.240000Z",
             "edited": "2014-12-20T20:58:18.427000Z",
-            "url": "http://swapi.co/api/planets/6/"
+            "url": "http://swapi.co/api/planets/6/",
+            "image": "http://www.hardcoregamer.com/wp-content/uploads/2016/06/Battlefront-Bespin.jpg"
         },
         {
             "name": "Endor",
@@ -121,7 +126,8 @@ const locations = [
             ],
             "created": "2014-12-10T11:50:29.349000Z",
             "edited": "2014-12-20T20:58:18.429000Z",
-            "url": "http://swapi.co/api/planets/7/"
+            "url": "http://swapi.co/api/planets/7/",
+            "image": "http://vignette3.wikia.nocookie.net/starwars/images/8/83/EndorSpace.jpg/revision/latest?cb=20090527045532"
         },
         {
             "name": "Naboo",
@@ -154,7 +160,8 @@ const locations = [
             ],
             "created": "2014-12-10T11:52:31.066000Z",
             "edited": "2014-12-20T20:58:18.430000Z",
-            "url": "http://swapi.co/api/planets/8/"
+            "url": "http://swapi.co/api/planets/8/",
+            "image": "http://vignette4.wikia.nocookie.net/starwars/images/5/50/Naboo.jpg/revision/latest?cb=20080723001712"
         },
         {
             "name": "Coruscant",
@@ -179,7 +186,8 @@ const locations = [
             ],
             "created": "2014-12-10T11:54:13.921000Z",
             "edited": "2014-12-20T20:58:18.432000Z",
-            "url": "http://swapi.co/api/planets/9/"
+            "url": "http://swapi.co/api/planets/9/",
+            "image": "http://vignette3.wikia.nocookie.net/starwars/images/8/84/CoruscantGlobeE1.png/revision/latest?cb=20130123002137"
         },
         {
             "name": "Kamino",
@@ -201,7 +209,8 @@ const locations = [
             ],
             "created": "2014-12-10T12:45:06.577000Z",
             "edited": "2014-12-20T20:58:18.434000Z",
-            "url": "http://swapi.co/api/planets/10/"
+            "url": "http://swapi.co/api/planets/10/",
+            "image": "http://vignette4.wikia.nocookie.net/starwars/images/a/a9/Eaw_Kamino.jpg/revision/latest?cb=20090527045541"
         },
         {
             "name": "Geonosis",
@@ -221,7 +230,8 @@ const locations = [
             ],
             "created": "2014-12-10T12:47:22.350000Z",
             "edited": "2014-12-20T20:58:18.437000Z",
-            "url": "http://swapi.co/api/planets/11/"
+            "url": "http://swapi.co/api/planets/11/",
+            "image": "https://www.universeguide.com/pictures/geonosis.jpg"
         }
     ]
     ;
