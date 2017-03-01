@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import styled from 'styled-components';
 import ListItem from './ListItem';
 import logo from '../resources/sw_logo_stacked@2x-f2a89ebadbaf.png';
 import './App.css';
@@ -226,6 +227,37 @@ const locations = [
     ]
     ;
 
+const Wrapper = styled.section`
+  background-color: rgba(0,0,0,0.75);
+  font-size: 18px;
+  height: 100%;
+  padding: 48px;
+  width: 100%;
+  ul {
+      list-style:none;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin: 0;
+      padding: 0;
+
+      li {
+          background-color: rgba(255,255,255, 0.075);
+          border: 1px solid #5a5a5a;
+          border-radius: 12px;
+          flex: 0 0 45%;
+          font-size: 24px;
+          margin: 12px;
+          padding: 12px;
+          transition: all .5s ease-in;
+
+          &:hover {
+              background-color: rgba(255,255,255, 0.25);
+          }
+      }
+  }
+`;
+
 class App extends Component {
     render() {
         return (
@@ -233,11 +265,11 @@ class App extends Component {
                 <div className="App-header">
                     <img src={logo} className="App-logo" alt="logo"/>
                 </div>
-                <p className="App-intro">
+                <Wrapper>
                     <ul>
                         {locations.map(location => <ListItem {...location}/>)}
                     </ul>
-                </p>
+                </Wrapper>
             </div>
         );
     }
