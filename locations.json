@@ -1,0 +1,12 @@
+[
+  {
+    "location": "5th street",
+    "name": "Stews bar",
+    "coordinates": {
+      "long": 1,
+      "lat": 2
+    },
+    "image": "src/logo.svg",
+    "details": "Stews bar is the best place to drink according to locals"
+  }
+]
