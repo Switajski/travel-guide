@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 
 export default class ListItem extends React.Component {
     render() {
-        return <li>Planet: {this.props.name} - Location: {this.props.location}</li>
+        return <li>{this.props.name}</li>
     }
 };
 
