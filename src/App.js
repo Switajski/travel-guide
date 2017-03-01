@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
+import { Parallax } from 'react-parallax';
 import ListItem from './ListItem';
 import logo from '../resources/sw_logo_stacked@2x-f2a89ebadbaf.png';
+import bgImg from '../resources/Star-field-near-M31.jpg';
 import './App.css';
 
 const locations = [
@@ -240,7 +242,7 @@ const locations = [
 const Wrapper = styled.section`
   background-color: rgba(0,0,0,0.75);
   font-size: 18px;
-  height: 100%;
+  height: calc(100vh);
   padding: 48px;
   width: 100%;
   ul {
@@ -268,18 +270,21 @@ const Wrapper = styled.section`
   }
 `;
 
+
 class App extends Component {
     render() {
         return (
             <div className="App">
+                <Parallax bgImage={bgImg} strength={400}>
                 <div className="App-header">
                     <img src={logo} className="App-logo" alt="logo"/>
                 </div>
                 <Wrapper>
                     <ul>
-                        {locations.map(location => <ListItem {...location}/>)}
+                      {locations.map(location => <ListItem {...location}/>)}
                     </ul>
                 </Wrapper>
+                </Parallax>
             </div>
         );
     }
