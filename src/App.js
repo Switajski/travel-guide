@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import ListItem from './ListItem';
-import logo from './logo.svg';
+import logo from '../resources/sw_logo_stacked@2x-f2a89ebadbaf.png';
 import './App.css';
 
 const locations = [
@@ -232,7 +232,6 @@ class App extends Component {
             <div className="App">
                 <div className="App-header">
                     <img src={logo} className="App-logo" alt="logo"/>
-                    <h2>Welcome to React</h2>
                 </div>
                 <p className="App-intro">
                     <ul>
