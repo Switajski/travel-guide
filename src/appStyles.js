@@ -1,12 +1,16 @@
-import React, {Component} from 'react';
 import styled from 'styled-components';
 
-const Wrapper = styled.section`
+export const Wrapper = styled.section`
   background-color: rgba(0,0,0,0.75);
   font-size: 18px;
-  height: calc(100vh);
+  min-height: calc(100vh);
+  height: 100%;
   padding: 48px;
   width: 100%;
+  &:after {
+    clear:both;
+    float:none;
+  }
   ul {
       list-style:none;
       display: flex;
@@ -32,4 +36,22 @@ const Wrapper = styled.section`
   }
 `;
 
-export default Wrapper;
+export const Details = styled.section`
+    background-color: rgba(black, 0.75);
+    border: 1px solid #5a5a5a;
+    border-radius: 12px;
+    img {
+      max-width:200px;
+      height: auto;
+      margin: 12px auto;
+      width:100%;
+    }
+    margin: 24px auto;
+    padding:24px;
+    ul {
+      li {
+        border: 0;
+      }
+    }
+
+`;

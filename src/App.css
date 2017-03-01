@@ -1,6 +1,7 @@
 .App {
   background: black;
-  height: calc(150vh);
+  min-height: calc(100vh);
+  height: 100%;
   position:relative;
   text-align: center;
   width: 100%;
@@ -13,7 +14,6 @@
 }
 
 .App-header {
-  background-color: #222;
   background: rgba(34,34,34,1);
   background: -moz-linear-gradient(left, rgba(34,34,34,1) 0%, rgba(34,34,34,0.92) 45%, rgba(19,19,19,0.88) 69%, rgba(0,0,0,0.88) 100%);
   background: -webkit-gradient(left top, right top, color-stop(0%, rgba(34,34,34,1)), color-stop(45%, rgba(34,34,34,0.92)), color-stop(69%, rgba(19,19,19,0.88)), color-stop(100%, rgba(0,0,0,0.88)));
@@ -40,4 +40,8 @@
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
+}
+
+.parallax-bg {
+  background-repeat: repeat-y;
 }
