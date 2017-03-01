@@ -1,10 +1,10 @@
 .App {
-  background: black url('../resources/Star-field-near-M31.jpg') no-repeat 0 0;
+  background: black;
+  height: calc(150vh);
+  position:relative;
   text-align: center;
-  height: calc(100vh);
   width: 100%;
-  position: relative;
-  opacity: 1;
+  z-index:0;
 }
 
 .App-logo {
@@ -14,6 +14,15 @@
 
 .App-header {
   background-color: #222;
+  background: rgba(34,34,34,1);
+  background: -moz-linear-gradient(left, rgba(34,34,34,1) 0%, rgba(34,34,34,0.92) 45%, rgba(19,19,19,0.88) 69%, rgba(0,0,0,0.88) 100%);
+  background: -webkit-gradient(left top, right top, color-stop(0%, rgba(34,34,34,1)), color-stop(45%, rgba(34,34,34,0.92)), color-stop(69%, rgba(19,19,19,0.88)), color-stop(100%, rgba(0,0,0,0.88)));
+  background: -webkit-linear-gradient(left, rgba(34,34,34,1) 0%, rgba(34,34,34,0.92) 45%, rgba(19,19,19,0.88) 69%, rgba(0,0,0,0.88) 100%);
+  background: -o-linear-gradient(left, rgba(34,34,34,1) 0%, rgba(34,34,34,0.92) 45%, rgba(19,19,19,0.88) 69%, rgba(0,0,0,0.88) 100%);
+  background: -ms-linear-gradient(left, rgba(34,34,34,1) 0%, rgba(34,34,34,0.92) 45%, rgba(19,19,19,0.88) 69%, rgba(0,0,0,0.88) 100%);
+  background: linear-gradient(to right, rgba(34,34,34,1) 0%, rgba(34,34,34,0.92) 45%, rgba(19,19,19,0.88) 69%, rgba(0,0,0,0.88) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#222222', endColorstr='#000000', GradientType=1 );
+  border-bottom: 3px solid black;
   height: 240px;
   padding: 20px;
   color: white;
