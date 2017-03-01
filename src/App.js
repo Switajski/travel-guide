@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
 import { Parallax } from 'react-parallax';
-import Wrapper from './appStyles';
+import { Wrapper } from './appStyles';
+import { Details } from './appStyles';
 import ListItem from './ListItem';
+import DetailsItem from './DetailsItem';
 import logo from '../resources/sw_logo_stacked@2x-f2a89ebadbaf.png';
 import bgImg from '../resources/Star-field-near-M31.jpg';
 import './App.css';
@@ -241,22 +243,29 @@ const locations = [
 
 
 class App extends Component {
-    render() {
-        return (
-            <div className="App">
-                <Parallax bgImage={bgImg} strength={400}>
-                <div className="App-header">
-                    <img src={logo} className="App-logo" alt="logo"/>
-                </div>
-                <Wrapper>
-                    <ul>
-                      {locations.map(location => <ListItem {...location}/>)}
-                    </ul>
-                </Wrapper>
-                </Parallax>
-            </div>
-        );
-    }
+  render() {
+    // filter the array by certain values.
+    const detailLocations = locations;
+
+    return (
+      <div className="App">
+        <Parallax bgImage={bgImg} strength={400} className="parallax-bg">
+          <div className="App-header">
+            <img src={logo} className="App-logo" alt="logo"/>
+          </div>
+          <Wrapper>
+            <ul>
+                {locations.map(location => <ListItem key={location.name} {...location}/>)}
+            </ul>
+            <Details>
+              {/*Here we could filter the lit by the item we choose with state / redux?*/}
+              {detailLocations.map(detailLocation => <DetailsItem key={detailLocation.name} {...detailLocation}/>)}
+            </Details>
+          </Wrapper>
+        </Parallax>
+      </div>
+    );
+  }
 }
 
 export default App;
