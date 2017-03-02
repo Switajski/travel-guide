@@ -1,6 +1,9 @@
 import googleClient from './googleClient';
 export const REQUEST_PICTURE = 'REQUEST_PICTURE';
 export const RECEIVE_PICTURE = 'RECEIVE_PICTURE';
+export const CHANGE_TO_BE_KILLED = 'CHANGE_TO_BE_KILLED';
+export const CHANGE_PLANET = 'CHANGE_PLANET';
+
 
 
 
@@ -24,6 +27,16 @@ export function fetchPicture(planetName) {
     }
 }
 
+export function changePlanet(planetName){
+    return dispatch => {
+        dispatch({
+            type: 'CHANGE_PLANET',
+            name: planetName
+        })
+        dispatch(fetchPicture(planetName))
+    }
+}
+
 function requestPicture(planetName) {
     return {
         type: REQUEST_PICTURE,
@@ -37,5 +50,13 @@ function receivePicture(planetName, image) {
         planetName,
         image,
         receivedAt: Date.now()
+    }
+}
+
+function changeToBeKilled(name, amount){
+    return {
+        type: CHANGE_TO_BE_KILLED,
+        planetName: name,
+        amount: amount
     }
 }

@@ -8,7 +8,8 @@ import logo from '../resources/sw_logo_stacked@2x-f2a89ebadbaf.png';
 import bgImg from '../resources/Star-field-near-M31.jpg';
 import './App.css';
 import locations from './Data';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
+import { CHANGE_TO_BE_KILLED, changePlanet } from './actions';
 
 
 
@@ -22,23 +23,18 @@ class App extends Component {
       indexedLocations[location.name] = location;
     }) 
 
-    this.state = {
-      chosenPlanet: 'Alderaan',
-      indexedLocations: indexedLocations
-    }
+    this.indexedLocations = indexedLocations
   }
 
-  onPlanetClick = (name) => {
-    this.setState({
-      chosenPlanet : name
-    })
+  cachedKilled = (name) => {
+
   }
 
   render() {
     // filter the array by certain values.
       const pictureFetched = this.props.state.pictures.find(
           (picture) => {
-              return picture.planetName === this.state.chosenPlanet
+              return picture.planetName === this.props.state.chosenPlanet
           }
       ) || {isFetching: true};
       console.log("pictureFetched", pictureFetched);
@@ -53,12 +49,17 @@ class App extends Component {
           </div>
           <Wrapper>
             <ul>
-              {locations.map(location => <ListItem key={location.name} {...location} onClick={() => this.onPlanetClick(location.name)} /> )}
+              {locations.map(location => <ListItem 
+              key={location.name} {...location} 
+              onClick={() => this.props.dispatch(changePlanet(location.name))} 
+              killed={() => this.cachedKilled(location.name)}/> )}
             </ul>
             <Details>
-              {/*Here we could filter the lit by the item we choose with state / redux?*/}
+              <p>Amount of people Darth Vader should kill</p>
+              <input value={this.props.toBeKilled} 
+              onChange={() => CHANGE_TO_BE_KILLED(location.name)}/>
 
-              <DetailsItem {...this.state.indexedLocations[this.state.chosenPlanet]} picture={pictureFetched} dispatch={this.props.dispatch}/>
+              <DetailsItem {...this.indexedLocations[this.props.state.chosenPlanet]} picture={pictureFetched} dispatch={this.props.dispatch}/>
             </Details>
           </Wrapper>
         </Parallax>
