@@ -107,3 +107,17 @@ export const Details = styled.section`
       }
     }
 `;
+
+export const SearchInputForm = styled.div`
+  margin: 0px auto 24px;
+  width: 50%;
+  input {
+    border-radius: 4px;
+    border: 1px solid #222;
+    height: 32px;
+    padding: 12px;
+    font-size: 18px;
+    width: 33%;
+
+  }
+`;
