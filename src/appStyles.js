@@ -78,8 +78,8 @@ export const Details = styled.section`
       li {
         border: 0;
         color: yellow;
-        width: 75%;
-        margin: 24px auto 0;
+        width: 66%;
+        margin: 0 auto;
         
         &:nth-of-type(1) {
           position: absolute;
