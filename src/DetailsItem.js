@@ -14,7 +14,7 @@ export default class DetailsItem extends React.Component {
             <div>
                 {!picture.isFetching
                     ? <img src={picture.image} onClick={() => dispatch(fetchPicture(name))} alt={name} role="presentation"/>
-                    :<div>Loading</div> }
+                    :<div className="loader">Loading</div> }
                 <h2>{name}</h2>
                 <ul>
                     <li>Population: {this.props.population}</li>

@@ -56,9 +56,19 @@ export const Details = styled.section`
     img {
       animation: App-logo-spin infinite 40s linear;
       border-radius: 50%;
-      max-width: 200px;
       height: auto;
       margin: 48px auto 24px;
+      max-width: 200px;
+      min-width: 200px;
+      min-height: 200px;
+      width: 100%;
+    }
+    .loader {
+      height: auto;
+      margin: 48px auto 24px;
+      max-width: 200px;
+      min-width: 200px;
+      min-height: 200px;
       width: 100%;
     }
     ul {
