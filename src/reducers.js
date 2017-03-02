@@ -1,6 +1,22 @@
-import { REQUEST_PICTURE, RECEIVE_PICTURE, CHANGE_PLANET, CHANGE_TO_BE_KILLED } from './actions';
+import { REQUEST_PICTURE, RECEIVE_PICTURE, CHANGE_PLANET, CHANGE_TO_BE_KILLED, KILL} from './actions';
+import locations from './Data';
+import killings from './DarthVaderMovement';
 
-const pictures = (state = { isFetching: false, pictures: [], chosenPlanet: "Alderaan", amountToBeKilled:1 }, action) => {
+let indexedLocations = [];
+    locations.forEach((location) => {
+      indexedLocations[location.name] = location;
+    }) 
+
+const initialState = { 
+    isFetching: false, 
+    pictures: [], 
+    chosenPlanet: "Alderaan", 
+    amountToBeKilled:1,
+    indexedLocations: indexedLocations,
+    killings: killings
+};
+
+const pictures = (state = initialState, action) => {
     switch (action.type) {
         case REQUEST_PICTURE:
             const picturesWithoutTheRequested = state.pictures.filter(picture => {
@@ -36,7 +52,15 @@ const pictures = (state = { isFetching: false, pictures: [], chosenPlanet: "Alde
         case CHANGE_PLANET:
             return { ...state, chosenPlanet: action.name }
         case CHANGE_TO_BE_KILLED:
-            return { ...state, toBeKilled: action.amountToBeKilled }
+            return { ...state, amountToBeKilled: action.amount }
+        case KILL:
+            const newKillings = [...killings, {
+                    planet: action.name,
+                    date: new Date().toISOString(),
+                    killed: action.amount
+                }];
+                debugger;
+            return { ...state, killings: newKillings}
         default:
             return state;
     }

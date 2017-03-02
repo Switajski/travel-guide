@@ -9,26 +9,20 @@ import DetailsItem from './DetailsItem';
 import logo from '../resources/sw_logo_stacked@2x-f2a89ebadbaf.png';
 import bgImg from '../resources/Star-field-near-M31.jpg';
 import './App.css';
-import locations from './Data';
 import { connect } from 'react-redux';
-import { changeToBeKilled, changePlanet } from './actions';
+import { changeToBeKilled, changePlanet, kill } from './actions';
 import SearchInput from './searchInput'
 
 class App extends Component {
 
-  constructor(props) {
-    super(props);
-
-    let indexedLocations = [];
-    locations.forEach((location) => {
-      indexedLocations[location.name] = location;
-    }) 
-
-    this.indexedLocations = indexedLocations
-  }
-
   cachedKilled = (name) => {
 
+  }
+
+  onKill = (evt) => {
+    evt.preventDefault()
+    debugger;
+    this.props.dispatch(kill(this.props.state.chosenPlanet, this.props.state.amountToBeKilled))
   }
 
   onTodoAdd = (text) => {
@@ -42,8 +36,11 @@ class App extends Component {
         }
     ) || {isFetching: true};
     console.log("pictureFetched", pictureFetched);
+    const locations = [];
+    Object.keys(this.props.state.indexedLocations).forEach(key => {
+      locations.push(this.props.state.indexedLocations[key]);
+    });
 
-    const detailLocations = locations;
     return (
       <div className="App">
         <Parallax bgImage={bgImg} strength={400} bgHeight="calc(100vh)">
@@ -61,15 +58,16 @@ class App extends Component {
               killed={() => this.cachedKilled(location.name)}/> )}
             </ul>
             <Details>
-              <DetailsItem {...this.indexedLocations[this.props.state.chosenPlanet]} picture={pictureFetched} dispatch={this.props.dispatch}/>
+              <DetailsItem {...this.props.state.indexedLocations[this.props.state.chosenPlanet]} picture={pictureFetched} dispatch={this.props.dispatch}/>
             </Details>
             <Vader>
             <p className="vaderRed">Amount of people Darth Vader should kill</p>
-              <input 
-              value={this.props.toBeKilled} 
-              onChange={() => changeToBeKilled(location.name)}
+              <form onSubmit={this.onKill}> <input 
+              value={this.props.amountToBeKilled} 
+              onChange={(evt) => this.props.dispatch(changeToBeKilled(this.props.state.chosenPlanet, evt.target.value))}
               placeholder="Use the Dark side"
               />
+              </form>
             </Vader>
           </Wrapper>
         </Parallax>
