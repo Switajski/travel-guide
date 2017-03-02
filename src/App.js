@@ -8,6 +8,8 @@ import logo from '../resources/sw_logo_stacked@2x-f2a89ebadbaf.png';
 import bgImg from '../resources/Star-field-near-M31.jpg';
 import './App.css';
 import locations from './Data';
+import { connect } from 'react-redux'
+
 
 
 class App extends Component {
@@ -34,6 +36,14 @@ class App extends Component {
 
   render() {
     // filter the array by certain values.
+      const pictureFetched = this.props.state.pictures.find(
+          (picture) => {
+              return picture.planetName === this.state.chosenPlanet
+          }
+      ) || {isFetching: true};
+      console.log("pictureFetched", pictureFetched);
+
+
     const detailLocations = locations;
     return (
       <div className="App">
@@ -47,7 +57,8 @@ class App extends Component {
             </ul>
             <Details>
               {/*Here we could filter the lit by the item we choose with state / redux?*/}
-              <DetailsItem {...this.state.indexedLocations[this.state.chosenPlanet]} />
+
+              <DetailsItem {...this.state.indexedLocations[this.state.chosenPlanet]} picture={pictureFetched} dispatch={this.props.dispatch}/>
             </Details>
           </Wrapper>
         </Parallax>
@@ -55,5 +66,8 @@ class App extends Component {
     );
   }
 }
+const mapStateToProps = state => {
+    return {state}
+};
 
-export default App;
+export default connect(mapStateToProps)(App)
