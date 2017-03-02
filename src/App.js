@@ -10,7 +10,13 @@ import bgImg from '../resources/Star-field-near-M31.jpg';
 import './App.css';
 import locations from './Data';
 import { connect } from 'react-redux';
+<<<<<<< HEAD
 import SearchInput from './searchInput'
+=======
+import { CHANGE_TO_BE_KILLED, changePlanet } from './actions';
+
+
+>>>>>>> c3bac40ebdb87b756141e031aedea3647a05bf75
 
 class App extends Component {
 
@@ -22,16 +28,11 @@ class App extends Component {
       indexedLocations[location.name] = location;
     }) 
 
-    this.state = {
-      chosenPlanet: 'Alderaan',
-      indexedLocations: indexedLocations
-    }
+    this.indexedLocations = indexedLocations
   }
 
-  onPlanetClick = (name) => {
-    this.setState({
-      chosenPlanet : name
-    })
+  cachedKilled = (name) => {
+
   }
 
   onTodoAdd = (text) => {
@@ -42,12 +43,13 @@ class App extends Component {
 
   render() {
     // filter the array by certain values.
-    const pictureFetched = this.props.state.pictures.find(
-        (picture) => {
-            return picture.planetName === this.state.chosenPlanet
-        }
-    ) || {isFetching: true};
-    console.log("pictureFetched", pictureFetched);
+
+      const pictureFetched = this.props.state.pictures.find(
+          (picture) => {
+              return picture.planetName === this.props.state.chosenPlanet
+          }
+      ) || {isFetching: true};
+      console.log("pictureFetched", pictureFetched);
 
 
     const detailLocations = locations;
@@ -62,12 +64,17 @@ class App extends Component {
             <SearchInput onSearchProp={this.onTodoAdd} />
             </SearchInputForm>
             <ul>
-              {locations.map(location => <ListItem key={location.name} {...location} onClick={() => this.onPlanetClick(location.name)} /> )}
+              {locations.map(location => <ListItem 
+              key={location.name} {...location} 
+              onClick={() => this.props.dispatch(changePlanet(location.name))} 
+              killed={() => this.cachedKilled(location.name)}/> )}
             </ul>
             <Details>
-              {/*Here we could filter the lit by the item we choose with state / redux?*/}
+              <p>Amount of people Darth Vader should kill</p>
+              <input value={this.props.toBeKilled} 
+              onChange={() => CHANGE_TO_BE_KILLED(location.name)}/>
 
-              <DetailsItem {...this.state.indexedLocations[this.state.chosenPlanet]} picture={pictureFetched} dispatch={this.props.dispatch}/>
+              <DetailsItem {...this.indexedLocations[this.props.state.chosenPlanet]} picture={pictureFetched} dispatch={this.props.dispatch}/>
             </Details>
           </Wrapper>
         </Parallax>
