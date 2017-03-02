@@ -1,6 +1,11 @@
 import { REQUEST_PICTURE, RECEIVE_PICTURE, CHANGE_PLANET } from './actions';
+import { combineReducers } from 'redux';
+import {
+  INVALIDATE_SWAPI,
+  REQUEST_SWAPI, RECEIVE_SWAPI
+} from './actions';
 
-const pictures = (state = { isFetching: false, pictures: [], chosenPlanet: "Alderaan" }, action) => {
+export const pictures = (state = { isFetching: false, pictures: [], chosenPlanet: "Alderaan" }, action) => {
     switch (action.type) {
         case REQUEST_PICTURE:
             const picturesWithoutTheRequested = state.pictures.filter(picture => {
@@ -40,4 +45,36 @@ const pictures = (state = { isFetching: false, pictures: [], chosenPlanet: "Alde
     }
 };
 
-export default pictures;
+function postsBySwapi(state = {
+  isFetching: false,
+  didInvalidate: false,
+  items: []
+}, action) {
+  switch (action.type) {
+    case INVALIDATE_SWAPI:
+      return Object.assign({}, state, {
+        didInvalidate: true
+      })
+    case REQUEST_SWAPI:
+      return Object.assign({}, state, {
+        isFetching: true,
+        didInvalidate: false
+      })
+    case RECEIVE_SWAPI:
+      return Object.assign({}, state, {
+        isFetching: false,
+        didInvalidate: false,
+        items: action.posts,
+        lastUpdated: action.receivedAt
+      })
+    default:
+      return state
+  }
+}
+
+const rootReducer = combineReducers({
+  postsBySwapi,
+  pictures,
+});
+
+export default rootReducer;
