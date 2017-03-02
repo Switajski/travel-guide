@@ -9,22 +9,16 @@ import DetailsItem from './DetailsItem';
 import logo from '../resources/sw_logo_stacked@2x-f2a89ebadbaf.png';
 import bgImg from '../resources/Star-field-near-M31.jpg';
 import './App.css';
-import locations from './Data';
+//import locations from './Data';
 import { connect } from 'react-redux';
-import SearchInput from './searchInput'
+import SearchInput from './searchInput';
 import { CHANGE_TO_BE_KILLED, changePlanet } from './actions';
+import { fetchPosts, invalidateSwapi} from './actions';
 
 class App extends Component {
 
-  constructor(props) {
-    super(props);
-
-    let indexedLocations = [];
-    locations.forEach((location) => {
-      indexedLocations[location.name] = location;
-    }) 
-
-    this.indexedLocations = indexedLocations
+  componentDidMount = () => {
+    this.props.dispatch(fetchPosts());
   }
 
   cachedKilled = (name) => {
@@ -36,14 +30,21 @@ class App extends Component {
   }
 
   render() {
-    const pictureFetched = this.props.state.pictures.find(
+
+  const { posts, isFetching, lastUpdated } = this.props;
+    const pictureFetched = this.props.state.pictures.pictures.find(
         (picture) => {
             return picture.planetName === this.props.state.chosenPlanet
         }
     ) || {isFetching: true};
-    console.log("pictureFetched", pictureFetched);
+    // console.log("pictureFetched", pictureFetched);
 
-    const detailLocations = locations;
+    const chosenPlanet = Object.values(this.props.state.postsBySwapi.items).find((post) => {
+      return post.name === this.props.state.pictures.chosenPlanet;
+    });
+
+    //console.log(chosenPlanet);
+
     return (
       <div className="App">
         <Parallax bgImage={bgImg} strength={400} bgHeight="calc(100vh)">
@@ -52,16 +53,16 @@ class App extends Component {
           </div>
           <Wrapper>
             <SearchInputForm>
-            <SearchInput onSearchProp={this.onTodoAdd} />
+              <SearchInput onSearchProp={this.onTodoAdd} />
             </SearchInputForm>
             <ul>
-              {locations.map(location => <ListItem 
+              {this.props.state.postsBySwapi.items.map(location => <ListItem 
               key={location.name} {...location} 
               onClick={() => this.props.dispatch(changePlanet(location.name))} 
               killed={() => this.cachedKilled(location.name)}/> )}
             </ul>
             <Details>
-              <DetailsItem {...this.indexedLocations[this.props.state.chosenPlanet]} picture={pictureFetched} dispatch={this.props.dispatch}/>
+              <DetailsItem {...chosenPlanet} picture={pictureFetched} dispatch={this.props.dispatch}/>
             </Details>
             <Vader>
             <p className="vaderRed">Amount of people Darth Vader should kill</p>
