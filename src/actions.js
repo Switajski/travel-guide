@@ -16,7 +16,7 @@ function getRandomInt(min, max) {
 export function fetchPicture(planetName) {
     return dispatch => {
         dispatch(requestPicture(planetName))
-        console.log("search", planetName + " planet")
+        // console.log("search", planetName + " planet")
         return googleClient.search("planet " + planetName).then(images => {
             if (images.length > 0) {
                 return images[getRandomInt(0, images.length - 1)].url;

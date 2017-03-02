@@ -31,48 +31,58 @@ class App extends Component {
 
   render() {
 
-  const { posts, isFetching, lastUpdated } = this.props;
-    const pictureFetched = this.props.state.pictures.pictures.find(
-        (picture) => {
-            return picture.planetName === this.props.state.chosenPlanet
-        }
-    ) || {isFetching: true};
-    // console.log("pictureFetched", pictureFetched);
-
     const chosenPlanet = Object.values(this.props.state.postsBySwapi.items).find((post) => {
       return post.name === this.props.state.pictures.chosenPlanet;
     });
 
-    //console.log(chosenPlanet);
+    const { posts, isFetching, lastUpdated } = this.props;
+    const pictureFetched = this.props.state.pictures.pictures.find(
+      (picture) => {
+          return picture.planetName === this.props.state.pictures.chosenPlanet
+      }
+    ) || {isFetching: true};
+    // console.log("pictureFetched", pictureFetched);
+
+    // console.log("chosenP", chosenPlanet);
 
     return (
       <div className="App">
         <Parallax bgImage={bgImg} strength={400} bgHeight="calc(100vh)">
+          
           <div className="App-header">
             <img src={logo} className="App-logo" alt="logo" />
           </div>
+
           <Wrapper>
+
             <SearchInputForm>
               <SearchInput onSearchProp={this.onTodoAdd} />
             </SearchInputForm>
+
             <ul>
-              {this.props.state.postsBySwapi.items.map(location => <ListItem 
-              key={location.name} {...location} 
-              onClick={() => this.props.dispatch(changePlanet(location.name))} 
-              killed={() => this.cachedKilled(location.name)}/> )}
+              {this.props.state.postsBySwapi.items.map(location => 
+              <ListItem 
+                key={location.name} {...location} 
+                onClicks={() => this.props.dispatch(changePlanet(location.name))} 
+                killed={() => this.cachedKilled(location.name)}
+              /> )}
             </ul>
+
             <Details>
               <DetailsItem {...chosenPlanet} picture={pictureFetched} dispatch={this.props.dispatch}/>
             </Details>
+
             <Vader>
-            <p className="vaderRed">Amount of people Darth Vader should kill</p>
+              <p className="vaderRed">Amount of people Darth Vader should kill</p>
               <input 
-              value={this.props.toBeKilled} 
-              onChange={() => CHANGE_TO_BE_KILLED(location.name)}
-              placeholder="Use the Dark side"
+                value={this.props.toBeKilled} 
+                onChange={() => CHANGE_TO_BE_KILLED(location.name)}
+                placeholder="Use the Dark side"
               />
             </Vader>
+
           </Wrapper>
+
         </Parallax>
 
       </div>
