@@ -19,8 +19,7 @@ export default [{
     ], 
     "created": "2014-12-10T11:35:48.479000Z", 
     "edited": "2014-12-20T20:58:18.420000Z", 
-    "url": "http://swapi.co/api/planets/2/",
-    "image": "http://vignette1.wikia.nocookie.net/starwars/images/4/4a/Alderaan.jpg/revision/latest/scale-to-width-down/500?cb=20061211013805"
+    "url": "http://swapi.co/api/planets/2/"
 }, 
 {
     "name": "Yavin IV", 

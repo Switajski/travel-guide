@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Parallax } from 'react-parallax';
 import { Wrapper } from './appStyles';
 import { Details } from './appStyles';
+import { SearchInputForm } from './appStyles';
+import { Vader } from './appStyles';
 import ListItem from './ListItem';
 import DetailsItem from './DetailsItem';
 import logo from '../resources/sw_logo_stacked@2x-f2a89ebadbaf.png';
@@ -10,8 +12,7 @@ import './App.css';
 import locations from './Data';
 import { connect } from 'react-redux';
 import { changeToBeKilled, changePlanet } from './actions';
-
-
+import SearchInput from './searchInput'
 
 class App extends Component {
 
@@ -30,15 +31,17 @@ class App extends Component {
 
   }
 
-  render() {
-    // filter the array by certain values.
-      const pictureFetched = this.props.state.pictures.find(
-          (picture) => {
-              return picture.planetName === this.props.state.chosenPlanet
-          }
-      ) || {isFetching: true};
-      console.log("pictureFetched", pictureFetched);
+  onTodoAdd = (text) => {
+    this.props.dispatch(changePlanet(text));
+  }
 
+  render() {
+    const pictureFetched = this.props.state.pictures.find(
+        (picture) => {
+            return picture.planetName === this.props.state.chosenPlanet
+        }
+    ) || {isFetching: true};
+    console.log("pictureFetched", pictureFetched);
 
     const detailLocations = locations;
     return (
@@ -48,6 +51,9 @@ class App extends Component {
             <img src={logo} className="App-logo" alt="logo" />
           </div>
           <Wrapper>
+            <SearchInputForm>
+            <SearchInput onSearchProp={this.onTodoAdd} />
+            </SearchInputForm>
             <ul>
               {locations.map(location => <ListItem 
               key={location.name} {...location} 
@@ -55,14 +61,19 @@ class App extends Component {
               killed={() => this.cachedKilled(location.name)}/> )}
             </ul>
             <Details>
-              <p>Amount of people Darth Vader should kill</p>
-              <input value={this.props.state.amountToBeKilled} 
-              onChange={(evt) => changeToBeKilled(location.name, evt.target.value)}/>
-
               <DetailsItem {...this.indexedLocations[this.props.state.chosenPlanet]} picture={pictureFetched} dispatch={this.props.dispatch}/>
             </Details>
+            <Vader>
+            <p className="vaderRed">Amount of people Darth Vader should kill</p>
+              <input 
+              value={this.props.toBeKilled} 
+              onChange={() => changeToBeKilled(location.name)}
+              placeholder="Use the Dark side"
+              />
+            </Vader>
           </Wrapper>
         </Parallax>
+
       </div>
     );
   }
