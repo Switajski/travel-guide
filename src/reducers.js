@@ -1,6 +1,6 @@
-import { REQUEST_PICTURE, RECEIVE_PICTURE, CHANGE_PLANET } from './actions';
+import { REQUEST_PICTURE, RECEIVE_PICTURE, CHANGE_PLANET, CHANGE_TO_BE_KILLED } from './actions';
 
-const pictures = (state = { isFetching: false, pictures: [], chosenPlanet: "Alderaan" }, action) => {
+const pictures = (state = { isFetching: false, pictures: [], chosenPlanet: "Alderaan", amountToBeKilled:1 }, action) => {
     switch (action.type) {
         case REQUEST_PICTURE:
             const picturesWithoutTheRequested = state.pictures.filter(picture => {
@@ -35,6 +35,8 @@ const pictures = (state = { isFetching: false, pictures: [], chosenPlanet: "Alde
             return;
         case CHANGE_PLANET:
             return { ...state, chosenPlanet: action.name }
+        case CHANGE_TO_BE_KILLED:
+            return { ...state, toBeKilled: action.amountToBeKilled }
         default:
             return state;
     }

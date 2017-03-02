@@ -9,7 +9,7 @@ import bgImg from '../resources/Star-field-near-M31.jpg';
 import './App.css';
 import locations from './Data';
 import { connect } from 'react-redux';
-import { CHANGE_TO_BE_KILLED, changePlanet } from './actions';
+import { changeToBeKilled, changePlanet } from './actions';
 
 
 
@@ -56,8 +56,8 @@ class App extends Component {
             </ul>
             <Details>
               <p>Amount of people Darth Vader should kill</p>
-              <input value={this.props.toBeKilled} 
-              onChange={() => CHANGE_TO_BE_KILLED(location.name)}/>
+              <input value={this.props.state.amountToBeKilled} 
+              onChange={(evt) => changeToBeKilled(location.name, evt.target.value)}/>
 
               <DetailsItem {...this.indexedLocations[this.props.state.chosenPlanet]} picture={pictureFetched} dispatch={this.props.dispatch}/>
             </Details>

@@ -30,10 +30,21 @@ export function fetchPicture(planetName) {
 export function changePlanet(planetName){
     return dispatch => {
         dispatch({
-            type: 'CHANGE_PLANET',
+            type: CHANGE_PLANET,
             name: planetName
         })
         dispatch(fetchPicture(planetName))
+    }
+}
+
+export function changeToBeKilled(name, amount){
+    debugger;
+    return dispatch => {
+        dispatch({
+            type: CHANGE_TO_BE_KILLED,
+            amount: amount,
+            planetName: name
+        })    
     }
 }
 
