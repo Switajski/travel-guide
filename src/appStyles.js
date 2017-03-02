@@ -28,6 +28,8 @@ export const Wrapper = styled.section`
       flex: 0 0 45%;
       font-size: 24px;
       margin: 12px;
+      max-width: 480px;
+      min-width: 260px;
       padding: 12px;
       transform-origin: center center;
       transition: all .5s ease-in;
@@ -64,11 +66,21 @@ export const Details = styled.section`
     border-radius: 50%;
     height: auto;
     margin: 48px auto 24px;
-    max-width: 200px;
+    max-width: 220px;
     min-width: 200px;
     min-height: 200px;
-    width: 100%;
     overflow: hidden;
+    transition: all .3s ease-in;
+    width: 200px;
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    -ms-backface-visibility: hidden;
+    backface-visibility: hidden;
+    
+    &:hover {
+      cursor: pointer;
+      box-shadow: 4px -4px 22px 2px #2d2d2d;
+    }
   }
   .loader {
     height: auto;
@@ -85,9 +97,10 @@ export const Details = styled.section`
     li {
       border: 0;
       color: yellow;
-      width: 66%;
       margin: 0 auto;
-      
+      max-width: 280px;
+      width: 66%;
+
       &:nth-of-type(1) {
         position: absolute;
         top: -348px;
@@ -132,7 +145,7 @@ export const SearchInputForm = styled.div`
 `;
 
 export const Vader = styled.section`
-  margin: 64px auto 24px;
+  margin: 96px auto 24px;
   width: 50%;
   input {
     border-radius: 4px;
