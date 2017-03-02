@@ -3,6 +3,7 @@ import { Parallax } from 'react-parallax';
 import { Wrapper } from './appStyles';
 import { Details } from './appStyles';
 import { SearchInputForm } from './appStyles';
+import { Vader } from './appStyles';
 import ListItem from './ListItem';
 import DetailsItem from './DetailsItem';
 import logo from '../resources/sw_logo_stacked@2x-f2a89ebadbaf.png';
@@ -10,13 +11,8 @@ import bgImg from '../resources/Star-field-near-M31.jpg';
 import './App.css';
 import locations from './Data';
 import { connect } from 'react-redux';
-<<<<<<< HEAD
 import SearchInput from './searchInput'
-=======
 import { CHANGE_TO_BE_KILLED, changePlanet } from './actions';
-
-
->>>>>>> c3bac40ebdb87b756141e031aedea3647a05bf75
 
 class App extends Component {
 
@@ -36,21 +32,16 @@ class App extends Component {
   }
 
   onTodoAdd = (text) => {
-    this.setState({
-      chosenPlanet: text
-    });
+    this.props.dispatch(changePlanet(text));
   }
 
   render() {
-    // filter the array by certain values.
-
-      const pictureFetched = this.props.state.pictures.find(
-          (picture) => {
-              return picture.planetName === this.props.state.chosenPlanet
-          }
-      ) || {isFetching: true};
-      console.log("pictureFetched", pictureFetched);
-
+    const pictureFetched = this.props.state.pictures.find(
+        (picture) => {
+            return picture.planetName === this.props.state.chosenPlanet
+        }
+    ) || {isFetching: true};
+    console.log("pictureFetched", pictureFetched);
 
     const detailLocations = locations;
     return (
@@ -70,12 +61,16 @@ class App extends Component {
               killed={() => this.cachedKilled(location.name)}/> )}
             </ul>
             <Details>
-              <p>Amount of people Darth Vader should kill</p>
-              <input value={this.props.toBeKilled} 
-              onChange={() => CHANGE_TO_BE_KILLED(location.name)}/>
-
               <DetailsItem {...this.indexedLocations[this.props.state.chosenPlanet]} picture={pictureFetched} dispatch={this.props.dispatch}/>
             </Details>
+            <Vader>
+            <p className="vaderRed">Amount of people Darth Vader should kill</p>
+              <input 
+              value={this.props.toBeKilled} 
+              onChange={() => CHANGE_TO_BE_KILLED(location.name)}
+              placeholder="Use the Dark side"
+              />
+            </Vader>
           </Wrapper>
         </Parallax>
 
