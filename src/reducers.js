@@ -1,4 +1,4 @@
-import { REQUEST_PICTURE, RECEIVE_PICTURE, CHANGE_PLANET } from './actions';
+import { REQUEST_PICTURE, RECEIVE_PICTURE, CHANGE_PLANET, ACTIVE_FLAG } from './actions';
 import { combineReducers } from 'redux';
 import {
   INVALIDATE_SWAPI,
@@ -72,9 +72,25 @@ function postsBySwapi(state = {
   }
 }
 
+
+function handleActiveStates(state = {
+    changeActive: false
+  }, action) {
+  switch (action.type) {
+    case ACTIVE_FLAG:
+      return {
+        ...state,
+        changeActive: action.changeActive
+      };
+    default:
+      return state
+  }
+}
+
 const rootReducer = combineReducers({
   postsBySwapi,
   pictures,
+  handleActiveStates,
 });
 
 export default rootReducer;
