@@ -13,6 +13,7 @@ import { connect } from 'react-redux';
 import SearchInput from './searchInput';
 import { changeToBeKilled, changePlanet, kill } from './actions';
 import { fetchPosts, invalidateSwapi} from './actions';
+import { changeActiveState } from './actions';
 
 class App extends Component {
 
@@ -24,6 +25,10 @@ class App extends Component {
     evt.preventDefault()
     debugger;
     this.props.dispatch(kill(this.props.state.choosePlanet.chosenPlanet, this.props.state.lordVader.amountToBeKilled))
+  }
+
+  handleOnHover = (isActive) => {
+    this.props.dispatch(changeActiveState(isActive));
   }
 
   onTodoAdd = (text) => {
@@ -73,6 +78,8 @@ class App extends Component {
                 key={location.name} {...location} 
                 onClicks={() => this.props.dispatch(changePlanet(location.name))} 
                 killed={() => this.cachedKilled(location.name)}
+                onMouseEnter={() => this.handleOnHover(true)}
+                onMouseOut={() => this.handleOnHover(false)}
               /> )}
             </ul>
 

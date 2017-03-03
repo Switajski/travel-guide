@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {fetchPicture} from './actions';
-
+import { ImageWrapper } from './appStyles';
 export default class DetailsItem extends React.Component {
   componentDidMount = () => {
       const {dispatch, name} = this.props;
@@ -19,9 +19,11 @@ export default class DetailsItem extends React.Component {
     console.log("this.props render", this.props)
     return (
       <div>
-        {!picture.isFetching
+        <ImageWrapper>
+          {!picture.isFetching
             ? <img src={picture.image} onClick={() => dispatch(fetchPicture(name))} alt={name} role="presentation"/>
             :<div className="loader">Loading</div> }
+        </ImageWrapper>
         <h2>{name}</h2>
         <ul>
             <li>Population: {population}</li>
