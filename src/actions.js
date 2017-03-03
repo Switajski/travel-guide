@@ -1,10 +1,14 @@
 import fetch from 'isomorphic-fetch'
 import googleClient from './googleClient';
+import { database } from './firebaseClient';
+
 export const REQUEST_PICTURE = 'REQUEST_PICTURE';
 export const RECEIVE_PICTURE = 'RECEIVE_PICTURE';
 export const CHANGE_TO_BE_KILLED = 'CHANGE_TO_BE_KILLED';
 export const CHANGE_PLANET = 'CHANGE_PLANET';
 export const KILL = 'KILL';
+
+export const CLEAR_KILLINGS = 'CLEAR_KILLINGS';
 
 // SWAPI
 export const REQUEST_SWAPI = 'REQUEST_SWAPI';
@@ -33,7 +37,15 @@ export function changePlanet(planetName) {
     return dispatch => {
         dispatch({
             type: CHANGE_PLANET,
-            name: planetName
+            name: planetName,
+        })
+        dispatch({
+            type: CLEAR_KILLINGS,
+        })
+        database.ref('/lordvaderadminpanel').orderByChild("name").equalTo(planetName).on('child_added', snap => {
+            console.log("snap new", snap.val());
+            const newKill = snap.val();
+            dispatch(_kill(newKill.name, newKill.amount));
         })
         dispatch(fetchPicture(planetName))
     }
@@ -47,12 +59,20 @@ export function changeToBeKilled(name, amount) {
     }
 }
 
-export function kill(name, amount) {
+export function _kill(name, amount) {
     return {
         type: KILL,
         amount: amount,
         name: name
     }
+}
+
+export const kill = (killAction) => (dispatch, getState, getFirebase) => {
+    console.log("killAction", killAction);
+    getFirebase().push('lordvaderadminpanel', killAction)
+        // .then(() => {
+        //     dispatch(_kill(killAction.name, killAction.amount));
+        // })
 }
 
 function requestPicture(planetName) {

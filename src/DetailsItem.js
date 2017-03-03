@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
-import {fetchPicture} from './actions';
+import {fetchPicture, _kill} from './actions';
+import { database } from './firebaseClient';
+
 
 export default class DetailsItem extends React.Component {
   componentDidMount = () => {
@@ -7,8 +9,14 @@ export default class DetailsItem extends React.Component {
 
       if (name) {
           dispatch(fetchPicture(name));
+          database.ref('/lordvaderadminpanel').orderByChild("name").equalTo(name).on('child_added', snap => {
+              console.log("snap new", snap.val());
+              const newKill = snap.val();
+              dispatch(_kill(newKill.name, newKill.amount));
+          })
       }
   }
+
 
   render() {
     const {picture, dispatch, name} = this.props;

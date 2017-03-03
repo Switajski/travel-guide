@@ -14,16 +14,37 @@ import SearchInput from './searchInput';
 import { changeToBeKilled, changePlanet, kill } from './actions';
 import { fetchPosts, invalidateSwapi} from './actions';
 
+import {
+    firebaseConnect,
+    isLoaded,
+    isEmpty,
+    dataToJS
+} from 'react-redux-firebase'
+
+// @firebaseConnect([
+//     '/killings'
+//     // { path: '/todos' } // object notation
+// ])
+// @connect(
+//     ({ firebase }) => ({
+//         // Connect todos prop to firebase todos
+//         todos: dataToJS(firebase, '/killings'),
+//     })
+// )
+
+
+
 class App extends Component {
 
   componentDidMount = () => {
+      // getFirebase()
     this.props.dispatch(fetchPosts());
   }
 
   onKill = (evt) => {
     evt.preventDefault()
-    debugger;
-    this.props.dispatch(kill(this.props.state.choosePlanet.chosenPlanet, this.props.state.lordVader.amountToBeKilled))
+    // debugger;
+    this.props.dispatch(kill({name: this.props.state.choosePlanet.chosenPlanet, amount: this.props.state.lordVader.amountToBeKilled}))
   }
 
   onTodoAdd = (text) => {
@@ -103,3 +124,17 @@ const mapStateToProps = state => {
 };
 
 export default connect(mapStateToProps)(App)
+
+//
+// const wrappedApp = firebaseConnect([
+//     '/killings'
+// ])(App)
+//
+// export default connect(
+//     ({firebase, state}) => ({
+//         killings: dataToJS(firebase, '/killings'),
+//         state: state
+//     })
+// )(wrappedApp)
+//
+// // export default connect(mapStateToProps)(App)

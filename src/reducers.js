@@ -3,8 +3,9 @@ import { combineReducers } from 'redux';
 import killings from './DarthVaderMovement';
 import {
   INVALIDATE_SWAPI,
-  REQUEST_SWAPI, RECEIVE_SWAPI
+  REQUEST_SWAPI, RECEIVE_SWAPI, CLEAR_KILLINGS
 } from './actions';
+import { firebaseStateReducer } from 'react-redux-firebase'
 
 export const pictures = (state = { pictures: []}, action) => {
     switch (action.type) {
@@ -53,8 +54,10 @@ function lordVader(state = {killings: killings, amountToBeKilled:1 }, action) {
                 date: new Date().toISOString(),
                 killed: action.amount
             }];
-            debugger;
             return { ...state, killings: newKillings}
+        case CLEAR_KILLINGS:
+            return {killings: []};
+            break;
         default:
             return state;
     }
@@ -100,6 +103,7 @@ function postsBySwapi(state = {
 }
 
 const rootReducer = combineReducers({
+    firebaseStateReducer,
   postsBySwapi,
   pictures,
     choosePlanet,
