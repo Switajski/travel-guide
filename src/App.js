@@ -11,7 +11,7 @@ import bgImg from '../resources/Star-field-near-M31.jpg';
 import './App.css';
 import { connect } from 'react-redux';
 import SearchInput from './searchInput';
-import { CHANGE_TO_BE_KILLED, changePlanet, kill } from './actions';
+import { changeToBeKilled, changePlanet, kill } from './actions';
 import { fetchPosts, invalidateSwapi} from './actions';
 
 class App extends Component {

@@ -47,7 +47,7 @@ export function changeToBeKilled(name, amount) {
     }
 }
 
-export function kill(name, amount){
+export function kill(name, amount) {
     return {
         type: KILL,
         amount: amount,
@@ -68,14 +68,6 @@ function receivePicture(planetName, image) {
         planetName,
         image,
         receivedAt: Date.now()
-    }
-}
-
-function changeToBeKilled(name, amount){
-    return {
-        type: CHANGE_TO_BE_KILLED,
-        planetName: name,
-        amount: amount
     }
 }
 

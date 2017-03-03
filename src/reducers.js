@@ -1,4 +1,4 @@
-import { REQUEST_PICTURE, RECEIVE_PICTURE, CHANGE_PLANET } from './actions';
+import { REQUEST_PICTURE, RECEIVE_PICTURE, CHANGE_PLANET, CHANGE_TO_BE_KILLED, KILL } from './actions';
 import { combineReducers } from 'redux';
 import killings from './DarthVaderMovement';
 import {
