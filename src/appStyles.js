@@ -112,7 +112,7 @@ export const Details = styled.section`
     li {
       border: 0;
       color: yellow;
-      height: 100%;
+      height: auto;
       margin: 0 auto;
       max-width: 280px;
       min-height: 84px;
