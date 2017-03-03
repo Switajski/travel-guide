@@ -1,22 +1,12 @@
-import { REQUEST_PICTURE, RECEIVE_PICTURE, CHANGE_PLANET, CHANGE_TO_BE_KILLED, KILL} from './actions';
-import locations from './Data';
+import { REQUEST_PICTURE, RECEIVE_PICTURE, CHANGE_PLANET } from './actions';
+import { combineReducers } from 'redux';
 import killings from './DarthVaderMovement';
+import {
+  INVALIDATE_SWAPI,
+  REQUEST_SWAPI, RECEIVE_SWAPI
+} from './actions';
 
-let indexedLocations = [];
-    locations.forEach((location) => {
-      indexedLocations[location.name] = location;
-    }) 
-
-const initialState = { 
-    isFetching: false, 
-    pictures: [], 
-    chosenPlanet: "Alderaan", 
-    amountToBeKilled:1,
-    indexedLocations: indexedLocations,
-    killings: killings
-};
-
-const pictures = (state = initialState, action) => {
+export const pictures = (state = { isFetching: false, pictures: [], chosenPlanet: "Alderaan", killings: killings, amountToBeKilled:1 }, action) => {
     switch (action.type) {
         case REQUEST_PICTURE:
             const picturesWithoutTheRequested = state.pictures.filter(picture => {
@@ -66,4 +56,36 @@ const pictures = (state = initialState, action) => {
     }
 };
 
-export default pictures;
+function postsBySwapi(state = {
+  isFetching: false,
+  didInvalidate: false,
+  items: []
+}, action) {
+  switch (action.type) {
+    case INVALIDATE_SWAPI:
+      return Object.assign({}, state, {
+        didInvalidate: true
+      })
+    case REQUEST_SWAPI:
+      return Object.assign({}, state, {
+        isFetching: true,
+        didInvalidate: false
+      })
+    case RECEIVE_SWAPI:
+      return Object.assign({}, state, {
+        isFetching: false,
+        didInvalidate: false,
+        items: action.posts,
+        lastUpdated: action.receivedAt
+      })
+    default:
+      return state
+  }
+}
+
+const rootReducer = combineReducers({
+  postsBySwapi,
+  pictures,
+});
+
+export default rootReducer;

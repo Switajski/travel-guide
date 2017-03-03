@@ -13,6 +13,7 @@ export const Wrapper = styled.section`
     clear:both;
     float:none;
   }
+
   ul {
     list-style:none;
     display: flex;
@@ -28,7 +29,7 @@ export const Wrapper = styled.section`
       flex: 0 0 45%;
       font-size: 24px;
       margin: 12px;
-      max-width: 480px;
+      max-width: 520px;
       min-width: 260px;
       padding: 12px;
       transform-origin: center center;
@@ -38,6 +39,7 @@ export const Wrapper = styled.section`
         background-color: rgba(255,255,255, 0.25);
         transform: translate3d(-24px,0,0);
       }
+
       &:nth-of-type(2n+2):hover {
         transform: translate3d(24px,0,0);
       }
@@ -47,14 +49,38 @@ export const Wrapper = styled.section`
 
 export const Details = styled.section`
   background-color: black;
-  border: 1px solid #5a5a5a;
+
+  /* can be treated like a fallback */
+  background-color: #3a1313;
+
+  /* will be "on top", if browser supports it */
+  background-image: linear-gradient(
+      to bottom,
+      #3a1313,
+      ${props => props.theme.bg};
+    );
+
+  /* these will reset other properties, like background-position, but it does know what you mean */
+  background: red;
+  background: linear-gradient(
+    to top,
+    #3a1313,
+    black 33%
+  );
+
+  border-bottom: 25px inset #2a2a2a;
+  border-top: 25px solid #3e3e11;
+  border-right: 25px inset #111;
+  border-left: 25px solid #111;
   border-radius: 50%;
   display: block;
   height: calc(50vh);
   margin: 48px auto 24px;
   padding:24px;
   position: relative;
+  transition: all .3s ease-in;
   width: calc(50vh);
+
   h2 {
     bottom: 0px;
     letter-spacing: 6px;
@@ -76,8 +102,13 @@ export const Details = styled.section`
     -moz-backface-visibility: hidden;
     -ms-backface-visibility: hidden;
     backface-visibility: hidden;
-    
-    &:hover {
+  }
+  &:hover {
+    border-bottom: 25px inset #3e3e11;
+    border-top: 25px solid #2a2a2a;
+    border-right: 25px inset #2a2a2a;
+    border-left: 25px solid #3e3e11;
+    img {
       cursor: pointer;
       box-shadow: 4px -4px 22px 2px #2d2d2d;
     }
@@ -127,6 +158,12 @@ export const Details = styled.section`
     }
   }
 `;
+
+Details.defaultProps = {
+  theme: {
+    bg: 'black' + '33%',
+  },
+};
 
 export const SearchInputForm = styled.div`
   margin: 0px auto 24px;
