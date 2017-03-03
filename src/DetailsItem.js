@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {fetchPicture, _kill} from './actions';
 import { database } from './firebaseClient';
-
+import { ImageWrapper } from './appStyles';
 
 export default class DetailsItem extends React.Component {
   componentDidMount = () => {
@@ -17,7 +17,6 @@ export default class DetailsItem extends React.Component {
       }
   }
 
-
   render() {
     const {picture, dispatch, name} = this.props;
     let population = this.props.population;
@@ -27,9 +26,11 @@ export default class DetailsItem extends React.Component {
     console.log("this.props render", this.props)
     return (
       <div>
-        {!picture.isFetching
+        <ImageWrapper>
+          {!picture.isFetching
             ? <img src={picture.image} onClick={() => dispatch(fetchPicture(name))} alt={name} role="presentation"/>
             :<div className="loader">Loading</div> }
+        </ImageWrapper>
         <h2>{name}</h2>
         <ul>
             <li>Population: {population}</li>

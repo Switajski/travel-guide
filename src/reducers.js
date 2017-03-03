@@ -1,4 +1,5 @@
-import { REQUEST_PICTURE, RECEIVE_PICTURE, CHANGE_PLANET, CHANGE_TO_BE_KILLED, KILL } from './actions';
+import { REQUEST_PICTURE, RECEIVE_PICTURE, CHANGE_PLANET, CHANGE_TO_BE_KILLED, KILL, ACTIVE_FLAG  } from './actions';
+
 import { combineReducers } from 'redux';
 import killings from './DarthVaderMovement';
 import {
@@ -102,12 +103,28 @@ function postsBySwapi(state = {
   }
 }
 
+
+function handleActiveStates(state = {
+    changeActive: false
+  }, action) {
+  switch (action.type) {
+    case ACTIVE_FLAG:
+      return {
+        ...state,
+        changeActive: action.changeActive
+      };
+    default:
+      return state
+  }
+}
+
 const rootReducer = combineReducers({
     firebaseStateReducer,
   postsBySwapi,
   pictures,
-    choosePlanet,
-    lordVader
+  handleActiveStates,
+  choosePlanet,
+  lordVader
 });
 
 export default rootReducer;

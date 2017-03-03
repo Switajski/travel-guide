@@ -14,6 +14,7 @@ export const CLEAR_KILLINGS = 'CLEAR_KILLINGS';
 export const REQUEST_SWAPI = 'REQUEST_SWAPI';
 export const RECEIVE_SWAPI = 'RECEIVE_SWAPI';
 export const INVALIDATE_SWAPI= 'INVALIDATE_SWAPI';
+export const ACTIVE_FLAG= 'ACTIVE_FLAG';
 
 function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -120,7 +121,14 @@ export function fetchPosts() {
     return fetch(`http://swapi.co/api/planets/?format=json`)
       .then(response => response.json())
       .then(json => dispatch(receiveSwapi(json)))
-      .catch(e => console.log(e))
+      //.catch(e => console.log(e))
+  }
+}
+
+export function changeActiveState(changeActive) {
+  return {
+    type: ACTIVE_FLAG,
+    changeActive
   }
 
 }
