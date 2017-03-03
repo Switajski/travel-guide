@@ -71,9 +71,9 @@ class App extends Component {
               /> )}
             </ul>
 
-            <Details>
+              {chosenPlanet && <Details>
               <DetailsItem {...chosenPlanet} picture={pictureFetched} dispatch={this.props.dispatch}/>
-            </Details>
+            </Details>}
 
             <Vader>
             <p className="vaderRed">Amount of people Darth Vader should kill</p>
