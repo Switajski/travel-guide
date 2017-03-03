@@ -43,10 +43,6 @@ class App extends Component {
       }
     ) || {isFetching: true};
     console.log("pictureFetched", pictureFetched);
-    const locations = [];
-    Object.keys(this.props.state.indexedLocations).forEach(key => {
-      locations.push(this.props.state.indexedLocations[key]);
-    });
 
     return (
       <div className="App">
