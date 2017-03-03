@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
 export const Wrapper = styled.section`
   background-color: rgba(0,0,0,0.75);
@@ -202,12 +202,27 @@ export const SearchInputForm = styled.div`
   }
 `;
 
+const rotate25 = keyframes`
+  0% {
+    transform: rotateY(0deg);
+  }
+
+  50% {
+    transform: rotateY(180deg);
+  }
+  100% {
+    transform: rotateY(0deg);
+  }
+`;
+
 export const Vader = styled.section`
   margin: 96px auto 24px;
+  position: relative;
   width: 50%;
   input {
     border-radius: 4px;
     border: 1px solid #222;
+    color: darkred;
     height: 32px;
     padding: 12px;
     font-size: 18px;
@@ -215,5 +230,23 @@ export const Vader = styled.section`
   }
   .vaderRed{
     color: red;
+  }
+  .vader-face {
+    background: white;
+    border-radius: 50%;
+    bottom: -40px;
+    height: 100px;
+    opacity: .85;
+    padding: 12px 8px;
+    position: absolute;
+    right: -104px;
+    
+    width: 100px;
+    img {
+      width: 85%;
+    }
+
+    animation: ${rotate25} 1s linear infinite;
+    
   }
 `;
