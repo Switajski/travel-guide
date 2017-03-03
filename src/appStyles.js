@@ -211,7 +211,7 @@ export const Vader = styled.section`
     height: 32px;
     padding: 12px;
     font-size: 18px;
-    width: 33%;
+    width: 50%;
   }
   .vaderRed{
     color: red;
