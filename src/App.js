@@ -8,6 +8,7 @@ import ListItem from './ListItem';
 import DetailsItem from './DetailsItem';
 import logo from '../resources/sw_logo_stacked@2x-f2a89ebadbaf.png';
 import bgImg from '../resources/Star-field-near-M31.jpg';
+import vader from '../resources/vader.png';
 import './App.css';
 import { connect } from 'react-redux';
 import SearchInput from './searchInput';
@@ -94,6 +95,7 @@ class App extends Component {
               onChange={(evt) => this.props.dispatch(changeToBeKilled(this.props.state.choosePlanet.chosenPlanet, evt.target.value))}
               placeholder="Use the Dark side"
               />
+              <div className="vader-face"><img src={vader} alt="Vader Face" /></div>
               </form>
             </Vader>
 
