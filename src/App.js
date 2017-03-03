@@ -23,7 +23,7 @@ class App extends Component {
   onKill = (evt) => {
     evt.preventDefault()
     debugger;
-    this.props.dispatch(kill(this.props.state.chosenPlanet, this.props.state.amountToBeKilled))
+    this.props.dispatch(kill(this.props.state.choosePlanet.chosenPlanet, this.props.state.lordVader.amountToBeKilled))
   }
 
   onTodoAdd = (text) => {
@@ -33,16 +33,25 @@ class App extends Component {
   render() {
 
     const chosenPlanet = Object.values(this.props.state.postsBySwapi.items).find((post) => {
-      return post.name === this.props.state.pictures.chosenPlanet;
+      return post.name === this.props.state.choosePlanet.chosenPlanet;
     });
 
     const { posts, isFetching, lastUpdated } = this.props;
     const pictureFetched = this.props.state.pictures.pictures.find(
       (picture) => {
-          return picture.planetName === this.props.state.pictures.chosenPlanet
+          return picture.planetName === this.props.state.choosePlanet.chosenPlanet
       }
     ) || {isFetching: true};
-    console.log("pictureFetched", pictureFetched);
+
+    const citizensKilled = this.props.state.lordVader.killings.reduce(
+        (acc, killings) => {
+          if (this.props.state.choosePlanet.chosenPlanet === killings.planet) {
+            return acc + parseInt(killings.killed);
+          }
+          return acc;
+        }, 0
+    )
+    console.log("citizensKilled", citizensKilled);
 
     return (
       <div className="App">
@@ -68,14 +77,14 @@ class App extends Component {
             </ul>
 
               {chosenPlanet && <Details>
-              <DetailsItem {...chosenPlanet} picture={pictureFetched} dispatch={this.props.dispatch}/>
+              <DetailsItem {...chosenPlanet} picture={pictureFetched} dispatch={this.props.dispatch} citizensKilled={citizensKilled}/>
             </Details>}
 
             <Vader>
             <p className="vaderRed">Amount of people Darth Vader should kill</p>
               <form onSubmit={this.onKill}> <input 
               value={this.props.amountToBeKilled} 
-              onChange={(evt) => this.props.dispatch(changeToBeKilled(this.props.state.chosenPlanet, evt.target.value))}
+              onChange={(evt) => this.props.dispatch(changeToBeKilled(this.props.state.choosePlanet.chosenPlanet, evt.target.value))}
               placeholder="Use the Dark side"
               />
               </form>

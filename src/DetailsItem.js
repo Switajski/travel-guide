@@ -12,6 +12,10 @@ export default class DetailsItem extends React.Component {
 
   render() {
     const {picture, dispatch, name} = this.props;
+    let population = this.props.population;
+    if (this.props.citizensKilled) {
+        population -= this.props.citizensKilled;
+    }
     console.log("this.props render", this.props)
     return (
       <div>
@@ -20,7 +24,7 @@ export default class DetailsItem extends React.Component {
             :<div className="loader">Loading</div> }
         <h2>{name}</h2>
         <ul>
-            <li>Population: {this.props.population}</li>
+            <li>Population: {population}</li>
             <li>Climate: {this.props.climate}</li>
             <li>Diameter: {this.props.diameter}</li>
             <li>Gravity: {this.props.gravity}</li>
