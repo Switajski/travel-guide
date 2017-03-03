@@ -4,6 +4,8 @@ export const REQUEST_PICTURE = 'REQUEST_PICTURE';
 export const RECEIVE_PICTURE = 'RECEIVE_PICTURE';
 export const CHANGE_TO_BE_KILLED = 'CHANGE_TO_BE_KILLED';
 export const CHANGE_PLANET = 'CHANGE_PLANET';
+export const KILL = 'KILL';
+
 // SWAPI
 export const REQUEST_SWAPI = 'REQUEST_SWAPI';
 export const RECEIVE_SWAPI = 'RECEIVE_SWAPI';
@@ -28,13 +30,29 @@ export function fetchPicture(planetName) {
     }
 }
 
-export function changePlanet(planetName){
+export function changePlanet(planetName) {
     return dispatch => {
         dispatch({
-            type: 'CHANGE_PLANET',
+            type: CHANGE_PLANET,
             name: planetName
         })
         dispatch(fetchPicture(planetName))
+    }
+}
+
+export function changeToBeKilled(name, amount) {
+    return {
+        type: CHANGE_TO_BE_KILLED,
+        amount: amount,
+        planetName: name
+    }
+}
+
+export function kill(name, amount) {
+    return {
+        type: KILL,
+        amount: amount,
+        name: name
     }
 }
 
@@ -51,14 +69,6 @@ function receivePicture(planetName, image) {
         planetName,
         image,
         receivedAt: Date.now()
-    }
-}
-
-function changeToBeKilled(name, amount){
-    return {
-        type: CHANGE_TO_BE_KILLED,
-        planetName: name,
-        amount: amount
     }
 }
 
@@ -100,4 +110,5 @@ export function changeActiveState(changeActive) {
     type: ACTIVE_FLAG,
     changeActive
   }
+
 }

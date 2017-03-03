@@ -9,11 +9,10 @@ import DetailsItem from './DetailsItem';
 import logo from '../resources/sw_logo_stacked@2x-f2a89ebadbaf.png';
 import bgImg from '../resources/Star-field-near-M31.jpg';
 import './App.css';
-//import locations from './Data';
 import { connect } from 'react-redux';
 import SearchInput from './searchInput';
-import { CHANGE_TO_BE_KILLED, changePlanet } from './actions';
-import { fetchPosts, invalidateSwapi } from './actions';
+import { changeToBeKilled, changePlanet, kill } from './actions';
+import { fetchPosts, invalidateSwapi} from './actions';
 import { changeActiveState } from './actions';
 
 class App extends Component {
@@ -22,8 +21,10 @@ class App extends Component {
     this.props.dispatch(fetchPosts());
   }
 
-  cachedKilled = (name) => {
-
+  onKill = (evt) => {
+    evt.preventDefault()
+    debugger;
+    this.props.dispatch(kill(this.props.state.choosePlanet.chosenPlanet, this.props.state.lordVader.amountToBeKilled))
   }
 
   handleOnHover = (isActive) => {
@@ -37,18 +38,25 @@ class App extends Component {
   render() {
 
     const chosenPlanet = Object.values(this.props.state.postsBySwapi.items).find((post) => {
-      return post.name === this.props.state.pictures.chosenPlanet;
+      return post.name === this.props.state.choosePlanet.chosenPlanet;
     });
 
     const { posts, isFetching, lastUpdated } = this.props;
     const pictureFetched = this.props.state.pictures.pictures.find(
       (picture) => {
-          return picture.planetName === this.props.state.pictures.chosenPlanet
+          return picture.planetName === this.props.state.choosePlanet.chosenPlanet
       }
     ) || {isFetching: true};
-    // console.log("pictureFetched", pictureFetched);
 
-    // console.log("chosenP", chosenPlanet);
+    const citizensKilled = this.props.state.lordVader.killings.reduce(
+        (acc, killings) => {
+          if (this.props.state.choosePlanet.chosenPlanet === killings.planet) {
+            return acc + parseInt(killings.killed);
+          }
+          return acc;
+        }, 0
+    )
+    console.log("citizensKilled", citizensKilled);
 
     return (
       <div className="App">
@@ -76,16 +84,17 @@ class App extends Component {
             </ul>
 
               {chosenPlanet && <Details>
-              <DetailsItem {...chosenPlanet} picture={pictureFetched} dispatch={this.props.dispatch}/>
+              <DetailsItem {...chosenPlanet} picture={pictureFetched} dispatch={this.props.dispatch} citizensKilled={citizensKilled}/>
             </Details>}
 
             <Vader>
-              <p className="vaderRed">Amount of people Darth Vader should kill</p>
-              <input 
-                value={this.props.toBeKilled} 
-                onChange={() => CHANGE_TO_BE_KILLED(location.name)}
-                placeholder="Use the Dark side"
+            <p className="vaderRed">Amount of people Darth Vader should kill</p>
+              <form onSubmit={this.onKill}> <input 
+              value={this.props.amountToBeKilled} 
+              onChange={(evt) => this.props.dispatch(changeToBeKilled(this.props.state.choosePlanet.chosenPlanet, evt.target.value))}
+              placeholder="Use the Dark side"
               />
+              </form>
             </Vader>
 
           </Wrapper>

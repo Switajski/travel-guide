@@ -1,11 +1,13 @@
-import { REQUEST_PICTURE, RECEIVE_PICTURE, CHANGE_PLANET, ACTIVE_FLAG } from './actions';
+import { REQUEST_PICTURE, RECEIVE_PICTURE, CHANGE_PLANET, CHANGE_TO_BE_KILLED, KILL, ACTIVE_FLAG  } from './actions';
+
 import { combineReducers } from 'redux';
+import killings from './DarthVaderMovement';
 import {
   INVALIDATE_SWAPI,
   REQUEST_SWAPI, RECEIVE_SWAPI
 } from './actions';
 
-export const pictures = (state = { isFetching: false, pictures: [], chosenPlanet: "Alderaan" }, action) => {
+export const pictures = (state = { pictures: []}, action) => {
     switch (action.type) {
         case REQUEST_PICTURE:
             const picturesWithoutTheRequested = state.pictures.filter(picture => {
@@ -37,22 +39,48 @@ export const pictures = (state = { isFetching: false, pictures: [], chosenPlanet
                 ...state,
                 pictures: newPictures
             };
-            return;
-        case CHANGE_PLANET:
-            return { ...state, chosenPlanet: action.name }
         default:
             return state;
     }
 };
 
+function lordVader(state = {killings: killings, amountToBeKilled:1 }, action) {
+    switch(action.type) {
+        case CHANGE_TO_BE_KILLED:
+            return { ...state, amountToBeKilled: action.amount }
+        case KILL:
+            const newKillings = [...state.killings, {
+                planet: action.name,
+                date: new Date().toISOString(),
+                killed: action.amount
+            }];
+            debugger;
+            return { ...state, killings: newKillings}
+        default:
+            return state;
+    }
+}
+
+function choosePlanet(state = {chosenPlanet: "Alderaan"}, action) {
+   switch (action.type) {
+       case 'CHANGE_PLANET':
+           return {
+               ...state,
+               chosenPlanet: action.name,
+           }
+       default:
+           return state;
+   }
+}
+
+
 function postsBySwapi(state = {
-  isFetching: false,
-  didInvalidate: false,
-  items: []
-}, action) {
-  switch (action.type) {
-    case INVALIDATE_SWAPI:
-      return Object.assign({}, state, {
+    isFetching: false,
+    didInvalidate: false,
+    items: [] }, action) {
+    switch (action.type) {
+        case INVALIDATE_SWAPI:
+            return Object.assign({}, state, {
         didInvalidate: true
       })
     case REQUEST_SWAPI:
@@ -91,6 +119,8 @@ const rootReducer = combineReducers({
   postsBySwapi,
   pictures,
   handleActiveStates,
+  choosePlanet,
+  lordVader
 });
 
 export default rootReducer;
