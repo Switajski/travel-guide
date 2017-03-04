@@ -119,7 +119,7 @@ function handleActiveStates(state = {
 }
 
 const rootReducer = combineReducers({
-    firebaseStateReducer,
+  firebaseStateReducer,
   postsBySwapi,
   pictures,
   handleActiveStates,
