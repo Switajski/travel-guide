@@ -246,7 +246,7 @@ export const Vader = styled.section`
       width: 85%;
     }
 
-    animation: ${rotate25} 1s linear infinite;
+    animation: ${rotate25} 2s linear infinite;
     
   }
 `;

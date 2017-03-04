@@ -1,3 +1,5 @@
+// This was some local test Data prior to fetching from swapi
+
 export default [{
     "name": "Alderaan", 
     "rotation_period": "24", 
